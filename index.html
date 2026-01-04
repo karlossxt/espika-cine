@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESPIKA CINE | La nueva perspectiva del cine</title>
+    <title>Cinema Espika | La nueva perspectiva del cine</title>
     
     <!-- Fuentes: 'Syne' (Títulos con personalidad) y 'Manrope' (Lectura limpia) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
     <!-- Iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Favicon (Usamos el mismo logo por ahora) -->
+    <link rel="icon" type="image/png" href="CinemaEspika.png">
 
     <style>
         :root {
             --bg: #050505;
             --surface: #121212;
             --text: #e0e0e0;
-            --accent: #E50914; /* Rojo Espika (Intenso) */
+            --accent: #E50914; /* Rojo Cine */
             --gold: #f5c518;
             --font-art: 'Syne', sans-serif;
             --font-body: 'Manrope', sans-serif;
@@ -36,33 +38,39 @@
         /* --- NAV --- */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: 20px 5%;
+            padding: 15px 5%; /* Un poco menos de padding para que el logo luzca */
             display: flex; justify-content: space-between; align-items: center;
             background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
             backdrop-filter: blur(10px);
         }
 
-        .logo { font-family: var(--font-art); font-weight: 800; font-size: 2rem; letter-spacing: -1px; text-transform: uppercase; }
-        .logo span { color: var(--accent); }
+        /* ESTILO DEL LOGO IMAGEN */
+        .nav-logo-img {
+            height: 50px; /* Altura fija para que no se vea gigante */
+            width: auto;  /* El ancho se ajusta solo */
+            display: block;
+            transition: 0.3s;
+        }
+        .nav-logo-img:hover { opacity: 0.8; }
 
-        .menu { display: flex; gap: 25px; }
-        .menu a { font-size: 0.8rem; text-transform: uppercase; font-weight: 700; opacity: 0.7; letter-spacing: 1px; }
+        .menu { display: flex; gap: 25px; align-items: center; }
+        .menu a { font-size: 0.85rem; text-transform: uppercase; font-weight: 700; opacity: 0.8; letter-spacing: 1px; }
         .menu a:hover, .menu a.active { opacity: 1; color: var(--accent); }
 
         /* --- HERO (ESTRENOS) --- */
         .hero {
             height: 90vh; width: 100%; position: relative; display: flex; align-items: center;
-            /* IMAGEN DE FONDO (Mickey 17 / Dune / Civil War) */
+            /* IMAGEN DE FONDO */
             background: url('https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
         }
         .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 5%, transparent 60%); }
-        .hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.3); }
+        .hero::before { content: ''; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
 
         .hero-content { position: relative; z-index: 2; padding: 0 5%; max-width: 900px; }
         
         .tag-hero { background: var(--accent); color: white; padding: 5px 12px; font-weight: 800; text-transform: uppercase; font-size: 0.75rem; letter-spacing: 2px; display: inline-block; margin-bottom: 20px; }
         
-        .hero h1 { font-family: var(--font-art); font-size: 5rem; line-height: 0.9; margin: 0 0 20px 0; text-transform: uppercase; }
+        .hero h1 { font-family: var(--font-art); font-size: 5rem; line-height: 0.9; margin: 0 0 20px 0; text-transform: uppercase; text-shadow: 2px 2px 10px black; }
         
         .hero-info { display: flex; gap: 20px; font-size: 1rem; color: #ddd; margin-bottom: 30px; align-items: center; }
         .rating { color: var(--gold); }
@@ -104,7 +112,7 @@
         .indie-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 20px; position: relative; z-index: 1; }
         
         .indie-card { position: relative; cursor: pointer; overflow: hidden; height: 300px; }
-        .indie-card.large { height: 620px; grid-row: span 2; } /* La foto grande */
+        .indie-card.large { height: 620px; grid-row: span 2; } 
         
         .indie-card img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; filter: grayscale(100%); }
         .indie-card:hover img { filter: grayscale(0%); transform: scale(1.05); }
@@ -121,7 +129,7 @@
 
         /* FOOTER */
         footer { padding: 60px 5%; border-top: 1px solid #222; text-align: center; font-size: 0.9rem; color: #555; }
-        .footer-logo { font-family: var(--font-art); font-size: 2rem; color: white; margin-bottom: 20px; display: block; }
+        .footer-logo { font-family: var(--font-art); font-size: 2rem; color: white; margin-bottom: 20px; display: block; text-transform: uppercase; font-weight: 800; }
         .socials i { font-size: 1.5rem; margin: 0 15px; color: white; transition: 0.3s; cursor: pointer; }
         .socials i:hover { color: var(--accent); }
 
@@ -130,21 +138,27 @@
             .hero h1 { font-size: 3rem; }
             .indie-grid { grid-template-columns: 1fr; }
             .indie-card.large { height: 400px; }
-            .menu { display: none; } /* En móvil se oculta (necesitaría JS para menú) */
+            .menu { display: none; } 
+            
+            /* Ajuste logo móvil */
+            .nav-logo-img { height: 40px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">ESPIKA<span>.</span></div>
+        <!-- AQUÍ ESTÁ TU LOGO -->
+        <a href="#">
+            <img src="CinemaEspika.png" alt="Cinema Espika Logo" class="nav-logo-img">
+        </a>
+
         <div class="menu">
             <a href="#" class="active">Estrenos</a>
             <a href="#indie">Indie</a>
             <a href="#nacional">Nacional</a>
-            <a href="#series">Series/Plataformas</a>
+            <a href="#series">Streaming</a>
             <a href="#terror">Terror</a>
-            <a href="#scifi">Sci-Fi</a>
         </div>
     </nav>
 
@@ -163,7 +177,7 @@
         </div>
     </header>
 
-    <!-- 1. CINE INDEPENDIENTE (A24, MUBI, FESTIVALES) -->
+    <!-- 1. CINE INDEPENDIENTE -->
     <section id="indie" class="indie-section">
         <div class="indie-bg-text">INDIE<br>CULT</div>
         
@@ -173,7 +187,6 @@
         </div>
 
         <div class="indie-grid">
-            <!-- Grande -->
             <div class="indie-card large">
                 <img src="https://images.unsplash.com/photo-1598899134739-24c46f58b8c0?q=80&w=800" alt="Indie 1">
                 <div class="indie-overlay">
@@ -181,7 +194,6 @@
                     <p style="color:var(--accent);">PALMA DE ORO CANNES</p>
                 </div>
             </div>
-            <!-- Pequeñas -->
             <div class="indie-card">
                 <img src="https://images.unsplash.com/photo-1533561052604-c3beb6d55760?q=80&w=600" alt="Indie 2">
                 <div class="indie-overlay"><h4>THE ZONE OF INTEREST</h4></div>
@@ -192,105 +204,4 @@
             </div>
             <div class="indie-card" style="grid-column: span 2;">
                 <img src="https://images.unsplash.com/photo-1515634928627-2a4e0dae3ddf?q=80&w=1200" alt="Indie 4">
-                <div class="indie-overlay"><h4>POOR THINGS</h4></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 2. CINE NACIONAL (MÉXICO) -->
-    <section id="nacional" class="category-section national-section">
-        <h2 class="cat-title"><span>MX</span> Hecho en México</h2>
-        <div class="movie-slider">
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1585647347384-2566b385a561?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Tótem</span><span class="movie-genre">Lila Avilés</span></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Heroico</span><span class="movie-genre">David Zonana</span></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1568876694728-451bbf694b83?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Huesera</span><span class="movie-genre">Michelle Garza</span></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1596727147705-06a8dd10a9a1?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Temporada de Huracanes</span><span class="movie-genre">Elisa Miller</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 3. PLATAFORMAS & SERIES -->
-    <section id="series" class="category-section">
-        <h2 class="cat-title">Series & Streaming</h2>
-        <div class="movie-slider">
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">The Last of Us S2</span><span class="movie-genre">MAX</span></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1616530940355-351fabd9524b?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">House of the Dragon</span><span class="movie-genre">MAX</span></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1512070800540-0d4192faa057?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">The Bear</span><span class="movie-genre">Disney+</span></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1560169897-fc0cdbcf44d0?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Severance</span><span class="movie-genre">Apple TV+</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- 4. GÉNEROS (TERROR / SCI-FI) -->
-    <section id="terror" class="category-section">
-        <h2 class="cat-title">Terror & Horror</h2>
-        <div class="movie-slider">
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cd4?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Nosferatu</span></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Longlegs</span></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1601513445506-2ab0d4fb4229?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Talk to Me</span></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="scifi" class="category-section" style="padding-bottom: 80px;">
-        <h2 class="cat-title">Sci-Fi</h2>
-        <div class="movie-slider">
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1535016120720-40c6874c3b1c?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Dune: Part Two</span></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1605806616949-1e87b487bc2a?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Blade Runner 2099</span></div>
-            </div>
-            <div class="movie-card">
-                <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?q=80&w=600" class="poster">
-                <div class="movie-info"><span class="movie-title">Civil War</span></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer>
-        <a href="#" class="footer-logo">ESPIKA CINE</a>
-        <div class="socials">
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-tiktok"></i>
-            <i class="fa-brands fa-youtube"></i>
-            <i class="fa-brands fa-x-twitter"></i>
-        </div>
-        <p style="margin-top:20px;">&copy; 2025 ESPIKA CINE. Todos los derechos reservados.</p>
-    </footer>
-
-</body>
-</html>
+                <div class="indie-overlay"><h
