@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cinema Espika | La nueva perspectiva del cine</title>
     
-    <!-- Fuentes: 'Syne' (Títulos con personalidad) y 'Manrope' (Lectura limpia) -->
+    <!-- Fuentes: 'Syne' (Títulos) y 'Manrope' (Cuerpo) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;500;700&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-    <!-- Iconos -->
+    <!-- Iconos FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Favicon (Usamos el mismo logo por ahora) -->
+    <!-- Favicon -->
     <link rel="icon" type="image/png" href="CinemaEspika.png">
 
     <style>
@@ -35,32 +35,62 @@
 
         a { text-decoration: none; color: white; transition: 0.3s; }
         
-        /* --- NAV --- */
+        /* --- NAV (ENCABEZADO) --- */
         nav {
             position: fixed; top: 0; width: 100%; z-index: 1000;
-            padding: 15px 5%; /* Un poco menos de padding para que el logo luzca */
+            padding: 15px 5%;
             display: flex; justify-content: space-between; align-items: center;
             background: linear-gradient(to bottom, rgba(0,0,0,0.95), transparent);
             backdrop-filter: blur(10px);
         }
 
-        /* ESTILO DEL LOGO IMAGEN */
-        .nav-logo-img {
-            height: 50px; /* Altura fija para que no se vea gigante */
-            width: auto;  /* El ancho se ajusta solo */
-            display: block;
-            transition: 0.3s;
+        /* CONTENEDOR LOGO + TEXTO */
+        .brand-container {
+            display: flex;
+            align-items: center;
+            gap: 15px; /* Espacio entre imagen y texto */
         }
-        .nav-logo-img:hover { opacity: 0.8; }
 
-        .menu { display: flex; gap: 25px; align-items: center; }
+        .nav-logo-img {
+            height: 65px; /* LOGO MÁS GRANDE */
+            width: auto;
+            display: block;
+        }
+
+        .brand-text {
+            font-family: var(--font-art);
+            font-weight: 800;
+            font-size: 1.5rem;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            color: white;
+            line-height: 1;
+        }
+
+        /* CONTENEDOR DERECHO (MENÚ + REDES) */
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+
+        .menu { display: flex; gap: 20px; align-items: center; }
         .menu a { font-size: 0.85rem; text-transform: uppercase; font-weight: 700; opacity: 0.8; letter-spacing: 1px; }
         .menu a:hover, .menu a.active { opacity: 1; color: var(--accent); }
+
+        /* REDES EN HEADER */
+        .header-socials {
+            display: flex;
+            gap: 15px;
+            padding-left: 20px;
+            border-left: 1px solid #333; /* Línea divisoria */
+        }
+        .header-socials i { font-size: 1.1rem; color: #ccc; cursor: pointer; transition: 0.3s; }
+        .header-socials i:hover { color: var(--accent); transform: scale(1.1); }
 
         /* --- HERO (ESTRENOS) --- */
         .hero {
             height: 90vh; width: 100%; position: relative; display: flex; align-items: center;
-            /* IMAGEN DE FONDO */
             background: url('https://images.unsplash.com/photo-1533174072545-e8d4aa97edf9?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
         }
         .hero::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--bg) 5%, transparent 60%); }
@@ -130,35 +160,51 @@
         /* FOOTER */
         footer { padding: 60px 5%; border-top: 1px solid #222; text-align: center; font-size: 0.9rem; color: #555; }
         .footer-logo { font-family: var(--font-art); font-size: 2rem; color: white; margin-bottom: 20px; display: block; text-transform: uppercase; font-weight: 800; }
-        .socials i { font-size: 1.5rem; margin: 0 15px; color: white; transition: 0.3s; cursor: pointer; }
-        .socials i:hover { color: var(--accent); }
+        
+        /* Redes Footer */
+        .footer-socials i { font-size: 1.5rem; margin: 0 15px; color: white; transition: 0.3s; cursor: pointer; }
+        .footer-socials i:hover { color: var(--accent); }
 
         /* RESPONSIVE */
         @media (max-width: 900px) {
             .hero h1 { font-size: 3rem; }
             .indie-grid { grid-template-columns: 1fr; }
             .indie-card.large { height: 400px; }
-            .menu { display: none; } 
             
-            /* Ajuste logo móvil */
-            .nav-logo-img { height: 40px; }
+            /* Ocultar menú y redes header en móvil */
+            .nav-right { display: none; }
+            
+            .brand-text { font-size: 1.2rem; }
+            .nav-logo-img { height: 50px; }
         }
     </style>
 </head>
 <body>
 
     <nav>
-        <!-- AQUÍ ESTÁ TU LOGO -->
-        <a href="#">
+        <!-- IZQUIERDA: LOGO + TEXTO -->
+        <a href="#" class="brand-container">
             <img src="CinemaEspika.png" alt="Cinema Espika Logo" class="nav-logo-img">
+            <span class="brand-text">Cinema Espika</span>
         </a>
 
-        <div class="menu">
-            <a href="#" class="active">Estrenos</a>
-            <a href="#indie">Indie</a>
-            <a href="#nacional">Nacional</a>
-            <a href="#series">Streaming</a>
-            <a href="#terror">Terror</a>
+        <!-- DERECHA: MENÚ + REDES -->
+        <div class="nav-right">
+            <div class="menu">
+                <a href="#" class="active">Estrenos</a>
+                <a href="#indie">Indie</a>
+                <a href="#nacional">Nacional</a>
+                <a href="#series">Streaming</a>
+                <a href="#terror">Terror</a>
+            </div>
+            
+            <!-- Redes en el Encabezado -->
+            <div class="header-socials">
+                <i class="fa-brands fa-instagram"></i>
+                <i class="fa-brands fa-tiktok"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-x-twitter"></i>
+            </div>
         </div>
     </nav>
 
@@ -204,4 +250,87 @@
             </div>
             <div class="indie-card" style="grid-column: span 2;">
                 <img src="https://images.unsplash.com/photo-1515634928627-2a4e0dae3ddf?q=80&w=1200" alt="Indie 4">
-                <div class="indie-overlay"><h
+                <div class="indie-overlay"><h4>POOR THINGS</h4></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2. CINE NACIONAL -->
+    <section id="nacional" class="category-section national-section">
+        <h2 class="cat-title"><span>MX</span> Hecho en México</h2>
+        <div class="movie-slider">
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1585647347384-2566b385a561?q=80&w=600" class="poster">
+                <div class="movie-info"><span class="movie-title">Tótem</span><span class="movie-genre">Lila Avilés</span></div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1626814026160-2237a95fc5a0?q=80&w=600" class="poster">
+                <div class="movie-info"><span class="movie-title">Heroico</span><span class="movie-genre">David Zonana</span></div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1568876694728-451bbf694b83?q=80&w=600" class="poster">
+                <div class="movie-info"><span class="movie-title">Huesera</span><span class="movie-genre">Michelle Garza</span></div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1596727147705-06a8dd10a9a1?q=80&w=600" class="poster">
+                <div class="movie-info"><span class="movie-title">Temporada de Huracanes</span><span class="movie-genre">Elisa Miller</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. SERIES -->
+    <section id="series" class="category-section">
+        <h2 class="cat-title">Series & Streaming</h2>
+        <div class="movie-slider">
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?q=80&w=600" class="poster">
+                <div class="movie-info"><span class="movie-title">The Last of Us S2</span><span class="movie-genre">MAX</span></div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1616530940355-351fabd9524b?q=80&w=600" class="poster">
+                <div class="movie-info"><span class="movie-title">House of the Dragon</span><span class="movie-genre">MAX</span></div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1512070800540-0d4192faa057?q=80&w=600" class="poster">
+                <div class="movie-info"><span class="movie-title">The Bear</span><span class="movie-genre">Disney+</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. TERROR -->
+    <section id="terror" class="category-section" style="padding-bottom: 80px;">
+        <h2 class="cat-title">Terror & Horror</h2>
+        <div class="movie-slider">
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1509347528160-9a9e33742cd4?q=80&w=600" class="poster">
+                <div class="movie-info"><span class="movie-title">Nosferatu</span></div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1519074069444-1ba4fff66d16?q=80&w=600" class="poster">
+                <div class="movie-info"><span class="movie-title">Longlegs</span></div>
+            </div>
+            <div class="movie-card">
+                <img src="https://images.unsplash.com/photo-1601513445506-2ab0d4fb4229?q=80&w=600" class="poster">
+                <div class="movie-info"><span class="movie-title">Talk to Me</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <a href="#" class="footer-logo">CINEMA ESPIKA</a>
+        
+        <!-- Redes Footer -->
+        <div class="footer-socials">
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-tiktok"></i>
+            <i class="fa-brands fa-youtube"></i>
+            <i class="fa-brands fa-x-twitter"></i>
+        </div>
+        
+        <!-- Texto de Derechos Actualizado -->
+        <p style="margin-top:20px; font-weight:bold;">&copy; 2026 Cinema Espika. Todos los derechos reservados.</p>
+    </footer>
+
+</body>
+</html>
